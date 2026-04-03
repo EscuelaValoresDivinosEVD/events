@@ -3,8 +3,18 @@ wb = xlsx_package.workbook
 table_header = wb.styles.add_style b: true, alignment: {horizontal: :center}
 table_cell = wb.styles.add_style alignment: {horizontal: :center}
 title = wb.styles.add_style b: true, sz: 14
+modalities = Event.find(params[:id]).modalities.order(is_composed: :desc, name: :asc)
 wb.add_worksheet(name: "Participantes - Metodo de pago") do |sheet|
-    row = ["Nombre", "Apellido", "Email", "País", "Fecha de Pago", "Razón", "Descripción"]
+    row = ["Nombre", "Apellido", "Email", "País"]
+    modalities.each do |modality|
+        row.push(modality.name)
+    end
+    row.push("Total estadías")
+    row.push("Total Modalidades")
+    row.push("Total Pagos")
+    row.push("Total Deuda")
+    row.push("Método de Pago")
+    row.push("Fecha de Pago", "Razón", "Descripción")
     Payment::PAYMENT_METHODS.each do |payment_method|
       row.push(payment_method)
     end
@@ -12,7 +22,66 @@ wb.add_worksheet(name: "Participantes - Metodo de pago") do |sheet|
     
     @participants.each do |participant|
         participant.payments.each do |payment|
-          row = [participant.guest.name, participant.guest.surname, participant.guest.email, participant.guest.country, payment.paid_at, payment.reason, payment.description]
+          row = [participant.guest.name, participant.guest.surname, participant.guest.email, participant.guest.country]
+          composed_space = participant.spaces.composed(true).first
+          if composed_space
+              compositions = composed_space.modality.compositions.joins(:submodality).order("modalities.name ASC").eager_load(submodality: :spaces)
+              $i = 0
+              found_composed = false
+              modalities.each_with_index do |modality, index|
+                  if found_composed
+                      comp = compositions[$i]
+                      if comp
+                          space = comp.submodality.spaces.where(place_id: composed_space.place.id).first
+                          if(modality.name != space.modality.name)
+                              row[index + 4] = "0"
+                          else
+                              row[index + 4] = space["amount"] - comp.discount
+                              $i += 1 if $i < comp.submodality.spaces.size
+                          end
+                      end
+                  elsif composed_space.modality.name == modality.name && found_composed == false 
+                      row[index + 4] = composed_space.amount
+                      found_composed = true
+                  else
+                      row[index + 4] = "0"
+                  end
+              end
+          end
+          
+          spaces = participant.spaces.order_by_name.composed(false).eager_load(:modality)
+          $i = 0
+          if(spaces.size > 0)
+              modalities.each_with_index do |modality, index|
+                  space = spaces[$i]
+                  if $i < spaces.size
+                      if space == nil
+                          $i += 1
+                      elsif(modality.name == space.modality.name)
+                          total_space_amount = 0
+                          while space != nil && modality.name == space.modality.name
+                              total_space_amount += space["amount"].to_f
+                              $i += 1
+                              space = spaces[$i]
+                          end
+                          row[index + 4] = total_space_amount
+                      elsif row[index + 4] == nil || row[index + 4] == ''
+                          row[index + 4] = '0'
+                      end
+                  else
+                      row[index + 4] = '0' if row[index + 4] == nil || row[index + 4] == ''
+                  end
+              end
+          end
+          modalities.each_with_index do |modality, index|
+            row[index + 4] = '0' if row[index + 4].nil? || row[index + 4] == ''
+          end
+          row.push(participant.stays_amount)
+          row.push(participant.spaces_amount)
+          row.push(participant.payments_spaces)
+          row.push((participant.payments_spaces - participant.spaces_amount - participant.stays_amount).abs)
+          row.push(participant.display_payments_method)
+          row.push(payment.paid_at, payment.reason, payment.description)
           Payment::PAYMENT_METHODS.each do |payment_method|
             payment_method == payment.method ? row.push(payment.amount) : row.push(0)
           end
