@@ -68,7 +68,7 @@ class EventsController < BaseEventController
     @participants = User.participants_by_role(current_user, resource)
     respond_to do |format|
 			format.xlsx {
-				response.headers['Content-Disposition'] = "attachment; filename=\"Pagos por modalidad #{DateTime.now.strftime('%Y %m %d')}.xlsx\""
+				response.headers['Content-Disposition'] = "attachment; filename=\"Pagos por Modalidad Completo #{DateTime.now.strftime('%Y %m %d')}.xlsx\""
 			}
 			format.html
 		end

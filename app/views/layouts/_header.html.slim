@@ -33,7 +33,7 @@ nav.navbar.navbar-default
 										= link_to "Detalle por modalidades separadas", report_composition_event_path({id: @event.id, by: "spaces", format: "xlsx"})
 										= link_to "Detalle por estadías", report_detail_event_path({id: @event.id, by: "stays", format: "xlsx"})
 										= link_to "Detalle por fechas", report_detail_event_path({id: @event.id, by: "dates", format: "xlsx"})
-										= link_to "Pagos por modalidad", report_payment_methods_event_path({id: @event.id, by: "dates", format: "xlsx"})
+										= link_to "Pagos por Modalidad Completo", report_payment_methods_event_path({id: @event.id, by: "dates", format: "xlsx"})
 					
 			ul.nav.navbar-nav.navbar-right
 				li.dropdown
