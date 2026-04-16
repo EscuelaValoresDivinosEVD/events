@@ -1,6 +1,12 @@
+\restrict 7TFsmNWxtzf2DOtxsz1dxOkKUucvfPynHHnbAKxUj57TYZLTW3IvqLG15F10BPU
+
+-- Dumped from database version 18.0 (Homebrew)
+-- Dumped by pg_dump version 18.0 (Homebrew)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -8,6 +14,20 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
 
 SET default_tablespace = '';
 
@@ -304,7 +324,8 @@ CREATE TABLE public.guests (
     age integer,
     outside boolean DEFAULT false,
     deleted_at timestamp without time zone,
-    swami_name character varying
+    swami_name character varying,
+    birth_date date
 );
 
 
@@ -1676,57 +1697,59 @@ ALTER TABLE ONLY public.token_controls
 -- PostgreSQL database dump complete
 --
 
+\unrestrict 7TFsmNWxtzf2DOtxsz1dxOkKUucvfPynHHnbAKxUj57TYZLTW3IvqLG15F10BPU
+
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20160117015536'),
-('20160117031750'),
-('20160117034228'),
-('20160117035019'),
-('20160117035205'),
-('20160117035235'),
-('20160117042101'),
-('20160726175948'),
-('20170209029833'),
-('20170209030519'),
-('20170618070221'),
-('20170618082053'),
-('20170618082148'),
-('20170618133334'),
-('20170618134344'),
-('20170618135818'),
-('20170618140358'),
-('20170618140522'),
-('20170618140726'),
-('20170618141732'),
-('20170621142819'),
-('20170625212559'),
-('20170626020107'),
-('20170626044501'),
-('20170626050435'),
-('20170628014850'),
-('20170628023302'),
-('20170705014159'),
-('20170705032632'),
-('20170705164854'),
-('20170720010645'),
-('20170727010659'),
-('20171102184827'),
-('20171218173647'),
-('20180331195323'),
-('20180331201331'),
-('20180331215544'),
-('20180401005733'),
-('20180401022849'),
-('20180430195834'),
-('20180503043852'),
-('20180503062943'),
-('20181203004335'),
-('20181203014110'),
-('20181203025216'),
-('20191220142020'),
-('20191220150204'),
+('20260416031000'),
+('20230807010424'),
 ('20220513033918'),
-('20230807010424');
-
+('20191220150204'),
+('20191220142020'),
+('20181203025216'),
+('20181203014110'),
+('20181203004335'),
+('20180503062943'),
+('20180503043852'),
+('20180430195834'),
+('20180401022849'),
+('20180401005733'),
+('20180331215544'),
+('20180331201331'),
+('20180331195323'),
+('20171218173647'),
+('20171102184827'),
+('20170727010659'),
+('20170720010645'),
+('20170705164854'),
+('20170705032632'),
+('20170705014159'),
+('20170628023302'),
+('20170628014850'),
+('20170626050435'),
+('20170626044501'),
+('20170626020107'),
+('20170625212559'),
+('20170621142819'),
+('20170618141732'),
+('20170618140726'),
+('20170618140522'),
+('20170618140358'),
+('20170618135818'),
+('20170618134344'),
+('20170618133334'),
+('20170618082148'),
+('20170618082053'),
+('20170618070221'),
+('20170209030519'),
+('20170209029833'),
+('20160726175948'),
+('20160117042101'),
+('20160117035235'),
+('20160117035205'),
+('20160117035019'),
+('20160117034228'),
+('20160117031750'),
+('20160117015536');
 

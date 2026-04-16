@@ -65,7 +65,7 @@ class GuestsController < ApplicationController
 	private
 
     def guest_params
-      params.require(:guest).permit(:name, :surname, :email, :country, :city, :phone_number, :mobile_number, :identification, :civil_status, :profession, :nationality, :health_condition, :receive_drug, :symptoms, :contact_name, :contact_kin, :contact_number, :hotel, :local_number, :comments, :is_initiate, :age, :outside, :swami_name)
+      params.require(:guest).permit(:name, :surname, :email, :country, :city, :phone_number, :mobile_number, :identification, :civil_status, :profession, :nationality, :health_condition, :receive_drug, :symptoms, :contact_name, :contact_kin, :contact_number, :hotel, :local_number, :comments, :is_initiate, :age, :birth_date, :outside, :swami_name)
     end
     
     def set_comming_from

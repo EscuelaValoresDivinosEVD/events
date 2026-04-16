@@ -43,3 +43,18 @@
   br
   br
   = f.submit nil, :class => 'btn btn-primary'
+
+.modal.fade#missing-guest-billing-data-modal tabindex="-1" role="dialog" aria-labelledby="missing-guest-billing-data-title"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title#missing-guest-billing-data-title No se puede agregar el participante
+      .modal-body
+        p
+          | Faltan datos obligatorios necesarios para facturar.
+        p#missing-guest-billing-data-fields.text-danger
+      .modal-footer
+        a#missing-guest-billing-data-edit-link.btn.btn-primary href="#" Editar participante
+        button.btn.btn-default type="button" data-dismiss="modal" Cerrar

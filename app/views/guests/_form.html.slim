@@ -22,17 +22,14 @@
           = f.text_field :email, :class => 'form-control', required: true
         - else
           = f.text_field :email, :class => 'form-control token-occupied', :readonly => true
-    - if current_user.admin? or current_user.coord_outside?
-      .form-group.col-lg-3
-        =f.label :country, :class => 'control-label two-line col-lg-12'
-        .col-lg-9
-          = f.country_select :country, { include_blank: 'Selecciona un país' }, { class: 'form-control' } 
-    - else
-      = f.hidden_field :country, value: current_user.country
+    .form-group.col-lg-3
+      = f.label :country, 'País de residencia', :class => 'control-label two-line col-lg-12'
+      .col-lg-9
+        = f.country_select :country, { include_blank: 'Selecciona un país' }, { class: 'form-control', required: true }
     .form-group.col-lg-3
       = f.label :city, :class => 'control-label two-line col-lg-12'
       .col-lg-12
-        = f.text_field :city, :class => 'form-control'
+        = f.text_field :city, :class => 'form-control', required: true
     .form-group.col-lg-3
       = f.label :phone_number, :class => 'control-label two-line col-lg-312'
       .col-lg-12
@@ -40,11 +37,11 @@
     .form-group.col-lg-3
       = f.label :mobile_number, :class => 'control-label two-line col-lg-12'
       .col-lg-12
-        = f.text_field :mobile_number, :class => 'form-control'
+        = f.text_field :mobile_number, :class => 'form-control', required: true
     .form-group.col-lg-3.text-left
       = f.label :identification, :class => 'control-label two-line col-lg-12'
       .col-lg-12
-        = f.text_field :identification, :class => 'form-control'
+        = f.text_field :identification, :class => 'form-control', required: true
     .form-group.col-lg-3
       = f.label :civil_status, :class => 'control-label two-line col-lg-12'
       .col-lg-12
@@ -57,6 +54,10 @@
       = f.label :nationality, :class => 'control-label col-lg-12'
       .col-lg-12
         = f.text_field :nationality, :class => 'form-control'
+    .form-group.col-lg-3
+      = f.label :birth_date, 'Fecha de nacimiento', :class => 'control-label two-line col-lg-12'
+      .col-lg-12
+        = f.date_field :birth_date, :class => 'form-control'
     .form-group.col-lg-3
       = f.label :age, :class => 'control-label two-line col-lg-12'
       .col-lg-12

@@ -37,6 +37,10 @@
       spam= @guest.nationality
   .col-xs-12.col-md-3
     p
+      b Fecha de nacimiento:
+      spam= @guest.birth_date
+  .col-xs-12.col-md-3
+    p
       b Edad: 
       spam= @guest.age
   - if @guest.swami_name.present?

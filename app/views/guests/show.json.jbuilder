@@ -1,1 +1,13 @@
-json.extract! @guest, :id, :name, :created_at, :updated_at
+json.extract! @guest,
+  :id,
+  :name,
+  :surname,
+  :email,
+  :country,
+  :city,
+  :phone_number,
+  :mobile_number,
+  :identification,
+  :birth_date,
+  :created_at,
+  :updated_at
