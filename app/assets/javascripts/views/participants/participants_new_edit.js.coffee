@@ -5,7 +5,7 @@ class Lodging.Views.ParticipantsNewEdit extends Backbone.View
 	events:
 		"change .modality_select": 'populateSpacesList'
 		"click #clean-guest-input-btn": 'cleanTokenInput'
-		"submit form.new_participant, submit form.edit_participant": 'validateGuestBillingData'
+		#"submit form.new_participant, submit form.edit_participant": 'validateGuestBillingData'
 		
 	initialize: ->
 		$('#participant_guest_id').tokenizeInput()
