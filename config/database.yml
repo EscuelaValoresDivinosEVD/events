@@ -2,19 +2,25 @@ development:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: cesarvalderrama
-  database: events_development
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "cesarvalderrama" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "" } %>
+  database: <%= ENV.fetch("POSTGRES_DB") { "events_development" } %>
 
 test:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: cesarvalderrama
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "cesarvalderrama" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "" } %>
   database: events_test
 
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: cesarvalderrama
-  database: events_production
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "cesarvalderrama" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "" } %>
+  database: <%= ENV.fetch("POSTGRES_DB") { "events_production" } %>

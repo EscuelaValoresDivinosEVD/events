@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# Remove a potentially pre-existing server.pid for Rails
+rm -f /rails/tmp/pids/server.pid
+
+# Create and migrate the database (skip seeds — they require pre-existing data)
+bundle exec rails db:create db:migrate
+
+# Then exec the container's main process (CMD in Dockerfile)
+exec "$@"
