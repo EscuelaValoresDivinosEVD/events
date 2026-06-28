@@ -3,7 +3,7 @@ services:
     image: postgres:17.2-alpine
     container_name: evd_events_postgres-17.2
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - evd_events_postgres_data:/var/lib/postgresql/data
     command:
       "postgres -c 'max_connections=500'"
     environment:
@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5431:5432"
   evd_events_web:
     build: .
     command: "./bin/rails server -b 0.0.0.0"
@@ -23,12 +23,12 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - .:/rails
-      - app-storage:/rails/storage
+      - evd_events_app_storage:/rails/storage
     depends_on:
       - evd_events_db
     ports:
-      - "3000:3000"
+      - "3001:3000"
 
 volumes:
-  postgres_data: {}
-  app-storage: {}
+  evd_events_postgres_data: {}
+  evd_events_app_storage: {}
