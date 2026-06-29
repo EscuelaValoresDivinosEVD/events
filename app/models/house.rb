@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  open_stay   :boolean          default(FALSE)
+#  deleted_at  :datetime
 #
 class House < ApplicationRecord
 

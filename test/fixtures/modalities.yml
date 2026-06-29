@@ -10,6 +10,7 @@
 #  start_at    :datetime
 #  end_at      :datetime
 #  is_composed :boolean          default(FALSE), not null
+#  deleted_at  :datetime
 #
 
 one:

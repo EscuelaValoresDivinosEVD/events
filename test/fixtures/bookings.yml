@@ -12,6 +12,7 @@
 #  amount         :decimal(, )
 #  deposit_amount :decimal(, )
 #  deposit_state  :string           default("pending")
+#  deleted_at     :datetime
 #
 
 one:

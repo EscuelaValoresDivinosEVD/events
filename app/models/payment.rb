@@ -10,8 +10,9 @@
 #  updated_at   :datetime         not null
 #  method       :string
 #  reason       :string           default("Evento")
-#  payable_id   :integer
 #  payable_type :string
+#  payable_id   :integer
+#  deleted_at   :datetime
 #
 class Payment < ApplicationRecord
 

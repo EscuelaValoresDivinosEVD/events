@@ -28,6 +28,11 @@
 #  is_initiate      :boolean
 #  age              :integer
 #  outside          :boolean          default(FALSE)
+#  deleted_at       :datetime
+#  swami_name       :string
+#  birth_date       :date
+#  status           :string
+#  address          :string
 #
 require 'test_helper'
 

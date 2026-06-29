@@ -6,6 +6,7 @@
 #  modality_id    :integer
 #  submodality_id :integer
 #  discount       :decimal(, )
+#  deleted_at     :datetime
 #
 class Composition < ApplicationRecord
     

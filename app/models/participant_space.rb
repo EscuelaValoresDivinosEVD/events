@@ -6,6 +6,7 @@
 #  participant_id :integer
 #  space_id       :integer
 #  note           :string
+#  deleted_at     :datetime
 #
 class ParticipantSpace < ApplicationRecord
   
