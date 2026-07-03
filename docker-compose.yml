@@ -21,6 +21,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - INTERNAL_API_KEY=${INTERNAL_API_KEY}
+      - FEDERATED_APP_BASE_URL=${FEDERATED_APP_BASE_URL}
     volumes:
       - .:/rails
       - evd_events_app_storage:/rails/storage

@@ -87,6 +87,16 @@ sofia.assign_attributes(name: "Sofía", surname: "Ruiz", country: "MX", city: "C
                         phone_number: "5512345678", outside: true, is_initiate: true)
 sofia.save!
 
+cesar = Guest.find_or_initialize_by(email: "iniciado@gmail.com")
+cesar.assign_attributes(name: "Ces", surname: "Val", country: "MX", city: "Ciudad de México",
+                        phone_number: "1234567890", outside: true, is_initiate: true)
+cesar.save!
+
+fake_swami = Guest.find_or_initialize_by(email: "swami@gmail.com")
+fake_swami.assign_attributes(name: "S", surname: "Sw", country: "AR", city: "Buenos Aires",
+                        phone_number: "987654321", outside: true, is_initiate: true)
+fake_swami.save!
+
 puts "== Participants =="
 unless Participant.joins(:spaces).where(guest: maria, spaces: { id: space_basico_sede }).exists?
   p1 = Participant.create!(guest: maria, deposit_state: "given")

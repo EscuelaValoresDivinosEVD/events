@@ -13,16 +13,20 @@
       spam= @guest.city
   .col-xs-12.col-md-3
     p
+      b Dirección:
+      spam= @guest.address
+  .col-xs-12.col-md-3
+    p
+      b Número de Pasaporte / Cédula: 
+      spam= @guest.identification
+  .col-xs-12.col-md-3
+    p
       b Teléfono Casa:
       spam= @guest.phone_number
   .col-xs-12.col-md-3
     p
       b Teléfono Móvil: 
       spam= @guest.mobile_number
-  .col-xs-12.col-md-3
-    p
-      b Número de Pasaporte / Cédula: 
-      spam= @guest.identification
   .col-xs-12.col-md-3
     p
       b Estado Civíl: 
@@ -41,8 +45,12 @@
       spam= @guest.birth_date
   .col-xs-12.col-md-3
     p
-      b Edad: 
+      b Edad:
       spam= @guest.age
+  .col-xs-12.col-md-3
+    p
+      b Estatus:
+      spam= @guest.status
   - if @guest.swami_name.present?
     .col-xs-12.col-md-3
       p

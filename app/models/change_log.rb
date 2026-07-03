@@ -8,10 +8,11 @@
 #  reviewer_id  :integer
 #  is_reviewed  :boolean          default(TRUE)
 #  reviewed_at  :datetime
-#  logable_id   :integer
 #  logable_type :string
+#  logable_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  deleted_at   :datetime
 #
 class ChangeLog < ApplicationRecord
   acts_as_paranoid
