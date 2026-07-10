@@ -1,4 +1,4 @@
-\restrict G2BCnCtbavPb2KJnKtprTsrdYNSl3GZZiJ2vODd3CaurVA93hcflzrsD08P3UfI
+\restrict II9UyuRZCIKsOjC2ux5Oj2MJI6l20plcEHs3DDeNK1bBnOqbZ4a8cpdrJPUWnV4
 
 -- Dumped from database version 17.2
 -- Dumped by pg_dump version 17.10 (Debian 17.10-1.pgdg12+1)
@@ -319,7 +319,8 @@ CREATE TABLE public.guests (
     swami_name character varying,
     birth_date date,
     status character varying,
-    address character varying
+    address character varying,
+    synced boolean DEFAULT false NOT NULL
 );
 
 
@@ -1656,11 +1657,12 @@ ALTER TABLE ONLY public.places_events
 -- PostgreSQL database dump complete
 --
 
-\unrestrict G2BCnCtbavPb2KJnKtprTsrdYNSl3GZZiJ2vODd3CaurVA93hcflzrsD08P3UfI
+\unrestrict II9UyuRZCIKsOjC2ux5Oj2MJI6l20plcEHs3DDeNK1bBnOqbZ4a8cpdrJPUWnV4
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260710143939'),
 ('20260629144236'),
 ('20260416031000'),
 ('20230807010424'),
