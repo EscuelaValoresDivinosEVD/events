@@ -48,7 +48,7 @@ namespace :guests do
           status:         data['status'],
           address:        data['address']
         }.compact
-        guest.update(attrs)
+        guest.update(attrs.merge(synced: true))
         puts "  synced: #{guest.email}"
         Rails.logger.info "#{identifier} synced: #{guest.email}"
         synced += 1
