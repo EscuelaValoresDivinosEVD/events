@@ -20,6 +20,7 @@ namespace :guests do
     synced = 0
     skipped = 0
     errors = 0
+    identifier = "[guests:sync_from_federation]"
 
     guests.find_each do |guest|
       uri = URI("#{base_url}/api/users")
@@ -47,18 +48,23 @@ namespace :guests do
           status:         data['status'],
           address:        data['address']
         }.compact
-        guest.update(attrs)
+        guest.update(attrs.merge(synced: true))
         puts "  synced: #{guest.email}"
+        Rails.logger.info "#{identifier} synced: #{guest.email}"
         synced += 1
       when 404
         puts "  WARN not found in federated app: #{guest.email}"
+        Rails.logger.warn "#{identifier} not found in federated app: #{guest.email}"
         skipped += 1
       else
         puts "  ERROR #{response.code} for #{guest.email}: #{response.body}"
+        Rails.logger.error "#{identifier} ERROR #{response.code} for #{guest.email}: #{response.body}"
         errors += 1
       end
     end
 
-    puts "\nDone. Synced: #{synced} | Skipped: #{skipped} | Errors: #{errors}"
+    summary = "Done. Synced: #{synced} | Skipped: #{skipped} | Errors: #{errors}"
+    puts "\n#{summary}"
+    Rails.logger.info "#{identifier} #{summary}"
   end
 end
