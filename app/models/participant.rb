@@ -163,6 +163,10 @@ class Participant < ApplicationRecord
     change_log.save
   end
 
+  def event
+    spaces.first&.modality&.event
+  end
+
   def show_path
     Rails.application.routes.url_helpers.event_participant_path(spaces.first.modality.event, self)
   end

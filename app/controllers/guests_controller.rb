@@ -21,6 +21,13 @@ class GuestsController < ApplicationController
 		end
 	end
 
+	def show
+		@event_participants = @guest.participants_chronological
+			.preload(spaces: [:place, { modality: :event }])
+			.page(params[:page])
+			.per(20)
+	end
+
 	def new
 		@back_url = URI(request.referer || root_path).path
 		new!

@@ -96,11 +96,42 @@
   .col-xs-12
     p
       b Comentarios adicionales: 
-      = @guest.contact_name
-  
-      
-    
-    
+      = @guest.comments
+
+.page-header
+  h4 Eventos y participación
+
+- if @event_participants.any?
+  table.table.table-striped
+    thead
+      tr
+        th Evento
+        th Fechas
+        th Participación
+        th Confirmado
+        th
+    tbody
+      - @event_participants.each do |participant|
+        - event = participant.event
+        tr
+          td
+            - if event.present?
+              = link_to event.name, event_path(event)
+            - else
+              | Sin evento asociado
+          td
+            - if event.present?
+              - dates = [event.start_at, event.end_at].compact.map { |date| l(date) }
+              = dates.join(' — ')
+          td= participant.spaces_to_s
+          td= participant.display_confirmed
+          td
+            - if event.present? && can?(:read, Participant)
+              = link_to 'Ver participación', event_participant_path(event, participant), class: 'btn btn-default btn-xs'
+  = paginate @event_participants
+- else
+  p Este contacto no está inscrito en ningún evento.
+
 = link_to "Volver", guests_path, :class => 'btn btn-default'
 br
 br

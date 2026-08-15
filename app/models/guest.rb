@@ -40,6 +40,7 @@ class Guest < ApplicationRecord
 	
 	has_many :bookings
 	has_many :beds, through: :bookings
+	has_many :participants
 	
 	scope :by_name, ->(name) { where( 'name ILIKE :name', {name: "%#{name}%"} ) }
 	scope :by_surname, ->(surname) { where( 'surname ILIKE :surname', {surname: "%#{surname}%"} ) }
@@ -63,5 +64,13 @@ class Guest < ApplicationRecord
 				country_name.translations[I18n.locale.to_s] || country_name.name
 			end
 		end
-	end	
+	end
+
+	def participants_chronological
+		participants
+			.select('participants.*')
+			.joins(spaces: { modality: :event })
+			.group('participants.id')
+			.order(Arel.sql('MIN(events.start_at) ASC, MIN(events.id) ASC'))
+	end
 end
