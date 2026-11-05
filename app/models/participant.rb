@@ -82,11 +82,11 @@ class Participant < ApplicationRecord
   end
   
   def stays_days
-    stays.sum("date_part('day', age(end_at, start_at))").to_i
+    stays.sum("floor(extract(epoch from (end_at - start_at)) / 86400)").to_i
   end
   
   def stays_amount
-    stays.sum("amount * date_part('day', age(end_at, start_at))")
+    stays.sum("amount * floor(extract(epoch from (end_at - start_at)) / 86400)")
   end
   
   def payments_amount
